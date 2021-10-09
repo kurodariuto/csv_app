@@ -28,6 +28,3 @@ CsvReader.read_range(
     CsvReader.end_set_row_count,
     CsvReader.set_column_count
 )
-
-
-
