@@ -91,7 +91,7 @@ class CsvReader:
             raise TypeError("set_column_count must be int")
         self.__set_column_count = set_column_count
 
-    def read_range(self, max_or_min, directory, start_set_row_count, end_set_row_count, set_column_count):
+    def read_range(self, min_or_max, directory, start_set_row_count, end_set_row_count, set_column_count):
         """
         Method
         ----------
@@ -100,7 +100,7 @@ class CsvReader:
 
         Parameter
         ----------
-        max_or_min：int
+        min_or_max：int
             MINか、MAX：str
 
         directory：str
@@ -118,7 +118,7 @@ class CsvReader:
         file_path_list = os.listdir(path=directory)
         global path
         global reader_list
-        path = "./" + max_or_min + directory
+        path = "./" + min_or_max + directory
         os.mkdir(path)
         for file in file_path_list:
 
@@ -153,7 +153,7 @@ class CsvReader:
                 csv_writer.write(reader_list, CsvConfig.MAX_OR_MIN)
 
 class CsvWriter:
-    def write(self, reader_list, max_or_min):
+    def write(self, reader_list, min_or_max):
         """
         Method
         ----------
@@ -165,19 +165,19 @@ class CsvWriter:
         reader_list：list
             指定した行範囲内の、CSVのリスト
 
-        max_or_min：str
+        min_or_max：str
             MINまたは、MAX
         """
         for file in reader_list:
-            if(max_or_min == "MIN"):
-                max_or_min_list = max(reader_list)
-                print(max_or_min_list)
-            elif (max_or_min == "MAX"):
-                max_or_min_list = min(reader_list)
-                print(max_or_min_list)
-            with open(path + "/" + max_or_min + file, "w") as f:
+            if(min_or_max == "MIN"):
+                min_or_max_list = max(reader_list)
+                print(min_or_max_list)
+            elif (min_or_max == "MAX"):
+                min_or_max_list = min(reader_list)
+                print(min_or_max_list)
+            with open(path + "/" + min_or_max + file, "w") as f:
                 writer = csv.writer(f)
-                writer.writerow([max_or_min, max_or_min_list])
+                writer.writerow([min_or_max, min_or_max_list])
 
 if __name__ == "__main__":
     MinMaxChecker()
